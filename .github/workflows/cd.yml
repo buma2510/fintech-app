@@ -6,7 +6,7 @@ on:
 
 env:
   AWS_REGION: eu-west-2
-  ECR_REPOSITORY: fintech-app-repo
+  ECR_REPOSITORY_URI: ${{ secrets.ECR_REPOSITORY_URI }}
   ECS_CLUSTER: fintech-app-cluster
   ECS_SERVICE: fintech-app-service
 
@@ -32,12 +32,12 @@ jobs:
 
     - name: Build Docker image
       run: |
-        docker build -t $ECR_REPOSITORY ./app
-        docker tag $ECR_REPOSITORY:latest ${{ steps.login-ecr.outputs.registry }}/$ECR_REPOSITORY:latest
+        docker build -t fintech-app ./app
+        docker tag fintech-app:latest $ECR_REPOSITORY_URI:latest
 
     - name: Push Docker image to ECR
       run: |
-        docker push ${{ steps.login-ecr.outputs.registry }}/$ECR_REPOSITORY:latest
+        docker push $ECR_REPOSITORY_URI:latest
 
     - name: Deploy to ECS
       run: |
