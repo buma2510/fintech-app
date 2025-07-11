@@ -28,8 +28,8 @@ jobs:
         uses: SonarSource/sonarcloud-github-action@v2
         with:
           args: >
-            -Dsonar.organization=Randy-Devops
-            -Dsonar.projectKey=randy-devops
+            -Dsonar.organization=<your-prganisation>
+            -Dsonar.projectKey=<your-project-key>
             -Dsonar.python.version=3.10
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
